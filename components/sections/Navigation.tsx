@@ -21,7 +21,6 @@ export default function Navigation() {
   const navItems = [
     { name: 'Projeler', href: '#projects' },
     { name: 'Hakkımda', href: '#about' },
-    { name: 'Yetenekler', href: '#skills' },
     { name: 'Sertifikalar', href: '#certificates' },
   ];
 
@@ -69,7 +68,7 @@ export default function Navigation() {
               ))}
 
               <motion.a
-                href="https://github.com/alperenmanas"
+                href="https://github.com/lprnmns"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1, rotate: 5 }}
@@ -84,6 +83,7 @@ export default function Navigation() {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden text-white"
+              aria-label="Menüyü aç"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -116,7 +116,7 @@ export default function Navigation() {
               ))}
 
               <motion.a
-                href="https://github.com/alperenmanas"
+                href="https://github.com/lprnmns"
                 target="_blank"
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, x: 20 }}

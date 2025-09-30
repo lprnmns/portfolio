@@ -3,19 +3,26 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Award, ExternalLink } from 'lucide-react';
+import Image from 'next/image';
 
 const certificates = [
   {
     name: 'Huawei HCIA-AI V3.5 (Turkish)',
     issuer: 'Huawei',
-    image: '/api/placeholder/400/300',
+    image: '/sertifikalar/huawei-hcia-ai-v3-5-turkish.png',
     gradient: 'from-red-500 to-orange-500',
   },
   {
-    name: 'BTK-Veri Tabanına Giriş',
+    name: 'BTK · Veri Tabanına Giriş',
     issuer: 'BTK Akademi',
-    image: '/api/placeholder/400/300',
+    image: '/sertifikalar/btk-veri-tabanina-giris.png',
     gradient: 'from-blue-500 to-cyan-500',
+  },
+  {
+    name: 'BTK · Uygulamalarla SQL Öğreniyorum',
+    issuer: 'BTK Akademi',
+    image: '/sertifikalar/btk-uygulamalarla-SQL.png',
+    gradient: 'from-purple-500 to-pink-500',
   },
 ];
 
@@ -37,7 +44,7 @@ export default function Certificates() {
             Sertifikalar
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Aldığım profesyonel sertifikalar ve eğitimler
+            Aldığım profesyonel sertifikalar ve teknik eğitimler
           </p>
         </motion.div>
 
@@ -46,7 +53,7 @@ export default function Certificates() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:grid-cols-3"
         >
           {certificates.map((cert, index) => (
             <motion.div
@@ -55,21 +62,27 @@ export default function Certificates() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2, duration: 0.6 }}
-              whileHover={{ y: -10, rotateY: 5 }}
+              whileHover={{ y: -10, rotateY: 4 }}
               className="group relative"
               style={{ perspective: '1000px' }}
             >
-              <div className="relative bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-slate-600 transition-all duration-300">
-                <div className={`absolute inset-0 bg-gradient-to-br ${cert.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+              <div className="relative bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-slate-600 transition-all duration-300 h-full">
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${cert.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
+                />
 
                 <div className="relative aspect-[4/3] bg-slate-700/50 overflow-hidden">
-                  <motion.div
-                    className={`w-full h-full bg-gradient-to-br ${cert.gradient} flex items-center justify-center`}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <Award size={80} className="text-white/80" />
-                  </motion.div>
+                  <Image
+                    src={cert.image}
+                    alt={`${cert.name} sertifikası`}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/30 to-transparent" />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Award size={64} className="text-white/80" />
+                  </div>
                 </div>
 
                 <div className="p-6">
@@ -84,6 +97,7 @@ export default function Certificates() {
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       whileTap={{ scale: 0.9 }}
                       className="p-2 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors"
+                      aria-label="Sertifika detayı"
                     >
                       <ExternalLink size={18} />
                     </motion.button>

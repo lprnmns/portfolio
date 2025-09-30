@@ -59,11 +59,7 @@ export default function Hero() {
               transition={{ delay: 1 }}
               className="text-xl md:text-2xl text-slate-300 font-light mb-8 h-8"
             >
-              <TypingAnimation
-                text="Yazılım Geliştirici & AI Mühendisi"
-                className="text-slate-300"
-                delay={80}
-              />
+              <TypingAnimation text="Yazılım Geliştirici & AI Mühendisi" className="text-slate-300" delay={80} />
             </motion.div>
           </div>
 
@@ -71,10 +67,12 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 2 }}
-            className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed"
           >
-            Android işletim sistemi yazılımları ve yapay zeka projeleri ile inovatif çözümler üreten,
-            düşük bütçe ile maksimum verimlilik odaklı yazılım geliştirici.
+            15 yaşından beri Android işletim sistemi geliştirmeleriyle uğraşıyorum. Son yıllarda odağımı gerçek hayat
+            problemlerini çözen yapay zeka projelerine kaydırdım. Düşük bütçeyle maksimum etki yaratacak çözümler
+            üretmek ve balina yatırımcıların hamlelerinden finansal içgörüler çıkaran sistemler geliştirmek benim için
+            bir tutku.
           </motion.p>
 
           <motion.div

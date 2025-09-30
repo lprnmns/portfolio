@@ -6,12 +6,12 @@ import { Mail, GraduationCap, Code, Brain, TrendingUp } from 'lucide-react';
 
 const skills = {
   programming: [
-    { name: 'Python', level: 90, color: 'from-blue-500 to-cyan-500' },
-    { name: 'C#', level: 75, color: 'from-purple-500 to-pink-500' },
-    { name: 'SQL', level: 85, color: 'from-orange-500 to-red-500' },
+    { name: 'TypeScript & React', level: 85, color: 'from-blue-500 to-cyan-500' },
+    { name: 'Python', level: 75, color: 'from-purple-500 to-pink-500' },
+    { name: 'SQL', level: 70, color: 'from-orange-500 to-red-500' },
   ],
   domains: [
-    { name: 'Yazılım-Programlama', icon: Code },
+    { name: 'Yazılım & Programlama', icon: Code },
     { name: 'Vibe Coding (Context & Prompt Engineering)', icon: Brain },
   ],
   interests: [
@@ -78,7 +78,7 @@ export default function About() {
                   <div className="flex items-start gap-2">
                     <GraduationCap className="text-blue-400 mt-1 flex-shrink-0" size={20} />
                     <p className="text-white text-lg">
-                      Kırıkkale Üniversitesi – Bilgisayar Mühendisliği (3. Sınıf)
+                      Kırıkkale Üniversitesi · Bilgisayar Mühendisliği (3. sınıf)
                     </p>
                   </div>
                 </div>
@@ -93,10 +93,10 @@ export default function About() {
               className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700/50"
             >
               <p className="text-slate-300 leading-relaxed">
-                15 yaşından beri bilgisayar ve özellikle Android işletim sistemi yazılımlarıyla (custom, port rom vb.) ilgileniyorum.
-                Son birkaç yıldır odağım yapay zeka modelleri. Özellikle çalışma mantığı farklı olan modelleri kullanıp test etmeyi seviyorum.
-                Şuan aklımdaki gerçek hayat problemlerini çözeceğini düşündüğüm projeleri AI araçlarıyla hayata geçirmeye çalışıyorum.
-                Amacım düşük bütçe ile en iyisini yapmak.
+                15 yaşından beri bilgisayar ve özellikle Android ekosistemindeki özelleştirmelerle ilgileniyorum. Son
+                yıllarda odağımı, gerçek hayat problemlerini çözeceğine inandığım projeleri hızla hayata geçirmek için
+                yapay zeka araçlarını kullanmaya kaydırdım. Balina yatırımcıların blockchain hareketlerini izleyen
+                finansal otomasyonlar ve üretkenlik araçları geliştirirken, düşük bütçeyle maksimum etkiyi hedefliyorum.
               </p>
             </motion.div>
           </motion.div>

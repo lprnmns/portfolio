@@ -3,39 +3,8 @@
 import { motion, useInView, Variants } from 'framer-motion';
 import { useRef } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
-
-const projects = [
-  {
-    id: 'zenith-trader',
-    title: 'Zenith Trader',
-    description: 'Gerçek zamanlı whale cüzdan takibiyle OKX üzerinde otomatik copy trading sunan kurumsal platform.',
-    image: '/api/placeholder/600/400',
-    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Node.js', 'Express', 'Prisma', 'Zod', 'PostgreSQL', 'Redis'],
-    demoUrl: '#',
-    githubUrl: '#',
-    gradient: 'from-blue-500 to-cyan-500',
-  },
-  {
-    id: 'lokaskor-pro',
-    title: 'LokaSkor Pro',
-    description: 'KOBİ\'ler ve girişimciler için yapay zeka destekli, veri-odaklı lokasyon analizi ve skorlama platformu.',
-    image: '/api/placeholder/600/400',
-    tags: ['Python', 'C#', 'SQL'],
-    demoUrl: '#',
-    githubUrl: '#',
-    gradient: 'from-emerald-500 to-teal-500',
-  },
-  {
-    id: 'email-admin',
-    title: 'Email Admin Panel',
-    description: 'Gelişmiş özelliklerle donatılmış, kullanıcı dostu email yönetim sistemi.',
-    image: '/api/placeholder/600/400',
-    tags: ['React', 'Node.js', 'PostgreSQL'],
-    demoUrl: '#',
-    githubUrl: '#',
-    gradient: 'from-pink-500 to-rose-500',
-  },
-];
+import Image from 'next/image';
+import { projectList } from '@/lib/projects-data';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -73,7 +42,7 @@ export default function Projects() {
             Projelerim
           </h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            İnovatif çözümler ve modern teknolojiler ile geliştirdiğim projeler
+            Gerçek iş problemlerine odaklanan, modern teknolojilerle geliştirdiğim projeler
           </p>
         </motion.div>
 
@@ -84,26 +53,29 @@ export default function Projects() {
           animate={isInView ? 'visible' : 'hidden'}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              variants={itemVariants}
-              whileHover={{ y: -10 }}
-              className="group relative"
-            >
-              <div className="relative bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-slate-600 transition-all duration-300">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+          {projectList.map((project) => {
+            const hasDemo = Boolean(project.demoUrl);
+            return (
+              <motion.div
+                key={project.id}
+                variants={itemVariants}
+                whileHover={{ y: -10 }}
+                className="group relative"
+              >
+                <div className="relative bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/50 hover:border-slate-600 transition-all duration-300">
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-300`}
+                  />
 
-                  <div className="relative aspect-video bg-slate-700/50 overflow-hidden">
-                    <motion.div
-                      className="w-full h-full bg-gradient-to-br flex items-center justify-center"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.4 }}
-                    >
-                      <div className={`text-6xl font-bold bg-gradient-to-br ${project.gradient} bg-clip-text text-transparent`}>
-                        {project.title.split(' ').map(word => word[0]).join('')}
-                      </div>
-                    </motion.div>
+                  <div className="relative aspect-video bg-slate-900 overflow-hidden">
+                    <Image
+                      src={project.coverImage}
+                      alt={`${project.title} kapak görseli`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/40 to-transparent" />
                   </div>
 
                   <div className="p-6">
@@ -111,12 +83,12 @@ export default function Projects() {
                       {project.title}
                     </h3>
 
-                    <p className="text-slate-400 mb-4 line-clamp-2">
-                      {project.description}
+                    <p className="text-slate-400 mb-4 line-clamp-3">
+                      {project.shortDescription}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.slice(0, 3).map((tag) => (
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tags.slice(0, 4).map((tag) => (
                         <span
                           key={tag}
                           className="px-3 py-1 text-xs font-medium bg-slate-700/50 text-blue-300 rounded-full border border-slate-600/50"
@@ -124,25 +96,31 @@ export default function Projects() {
                           {tag}
                         </span>
                       ))}
-                      {project.tags.length > 3 && (
+                      {project.tags.length > 4 && (
                         <span className="px-3 py-1 text-xs font-medium bg-slate-700/50 text-slate-400 rounded-full border border-slate-600/50">
-                          +{project.tags.length - 3}
+                          +{project.tags.length - 4}
                         </span>
                       )}
                     </div>
 
                     <div className="flex gap-3">
                       <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileHover={hasDemo ? { scale: 1.05 } : {}}
+                        whileTap={hasDemo ? { scale: 0.95 } : {}}
+                        disabled={!hasDemo}
                         onClick={(e) => {
+                          if (!project.demoUrl) return;
                           e.preventDefault();
-                          window.open(project.demoUrl, '_blank');
+                          window.open(project.demoUrl, '_blank', 'noopener');
                         }}
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg text-white font-medium text-sm hover:shadow-lg hover:shadow-blue-500/50 transition-all"
+                        className={`flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                          hasDemo
+                            ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:shadow-lg hover:shadow-blue-500/50'
+                            : 'bg-slate-700/40 text-slate-500 cursor-not-allowed'
+                        }`}
                       >
                         <ExternalLink size={16} />
-                        Test Et
+                        Canlı Demo
                       </motion.button>
 
                       <motion.button
@@ -150,7 +128,7 @@ export default function Projects() {
                         whileTap={{ scale: 0.95 }}
                         onClick={(e) => {
                           e.preventDefault();
-                          window.open(project.githubUrl, '_blank');
+                          window.open(project.githubUrl, '_blank', 'noopener');
                         }}
                         className="px-4 py-2 bg-slate-700/50 hover:bg-slate-700 rounded-lg text-slate-300 border border-slate-600/50 transition-all"
                       >
@@ -169,8 +147,9 @@ export default function Projects() {
                     </div>
                   </motion.div>
                 </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>
